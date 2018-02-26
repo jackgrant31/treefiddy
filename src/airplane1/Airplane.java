@@ -5,7 +5,7 @@ import java.util.Arrays;
 public class Airplane { //airplane houses passengers and methods relating to them
 
 	
-	int NumSeats =154; //temporary
+	int NumSeats =150; //temporary
 	
 	public void populateArray() { //this creates a seating array and random passenger array//put in inherited classes for different capacities
 		
