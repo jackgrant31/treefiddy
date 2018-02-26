@@ -2,10 +2,14 @@ package airplane1;
 import java.util.Arrays;
 
 
+
 public class Airplane { //airplane houses passengers and methods relating to them
 
+	public int NumSeats;
 	
-	int NumSeats =150; //temporary
+	public Airplane(int specNumSeats) {
+		NumSeats = specNumSeats;
+	}
 	
 	public void populateArray() { //this creates a seating array and random passenger array//put in inherited classes for different capacities
 		
@@ -29,5 +33,9 @@ public class Airplane { //airplane houses passengers and methods relating to the
 				System.out.println(Arrays.toString(Plane_Seats));
 				System.out.println(Arrays.toString(Passenger_Numbers));
 		
+	}
+	
+	public void setNumSeats(int temp) {
+		NumSeats = temp;
 	}
 }

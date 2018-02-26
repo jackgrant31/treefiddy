@@ -1,7 +1,9 @@
 package airplane1;
 public class Plane800 extends Airplane {
 
-	static int NumSeats = 154;
+	public Plane800(int specNumSeats) {
+		super(specNumSeats);
+	};
 	
 	public static void main(String args[]) {
 		
