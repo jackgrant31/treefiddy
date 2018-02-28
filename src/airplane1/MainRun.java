@@ -2,7 +2,7 @@ package airplane1;
 
 public class MainRun {
 	
-//brogan has hairy arms
+//brogan has short arms
 	
 	public static void run()  {
         MainRun flight = new MainRun();
