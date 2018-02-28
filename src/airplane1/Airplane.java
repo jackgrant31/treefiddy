@@ -38,4 +38,10 @@ public class Airplane { //airplane houses passengers and methods relating to the
 	public void setNumSeats(int temp) {
 		NumSeats = temp;
 	}
+	
+	private void checkIsBoarded()  {
+
+	}
+	
+	
 }

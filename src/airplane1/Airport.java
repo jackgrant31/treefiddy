@@ -1,7 +1,6 @@
 package airplane1;
 
 public class Airport {
-
 	
 	public static void main(String args[]) {
 		op800();
@@ -23,5 +22,36 @@ public class Airport {
 		//forA320
 				PlaneA320 a3 = new PlaneA320(150);
 				a3.populateArray();
+	}
+	
+	private void initAirport()  {
+
+		//initAirplane();	
+
+	}
+	
+	private void initAirplane()  {
+
+		//initPlane()
+	}
+	
+	private void initPassengers()  {
+
+		
+	}
+	
+	private void updatePassengers()  {
+
+		//movePassenger()
+	}
+	
+	private void updateAirplane	()  {
+
+		
+	}
+	
+	private void isBoarding()  {
+
+		
 	}
 }
