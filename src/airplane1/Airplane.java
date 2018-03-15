@@ -14,6 +14,7 @@ public class Airplane { //airplane houses passengers and methods relating to the
 	int[] Plane_Seats = new int[NumSeats];
 	int[] row7 = new int[NumSeats];
 	int[] time = new int[NumSeats];
+	int rmax =0;
 	
 	
 	public void populateArray() { //this creates a seating array and random passenger array//put in inherited classes for different capacities
@@ -89,7 +90,6 @@ public class Airplane { //airplane houses passengers and methods relating to the
 	}
 	
 	public int rowMax() {
-		int rmax =0;
 		for(int i=0; i<NumSeats; i++) {
 			if (row7[i] > rmax) {
 				row7[i] = rmax;
