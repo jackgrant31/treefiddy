@@ -3,8 +3,9 @@ package airplane1;
 import java.util.Arrays;
 
 public class Airport {
-	static Airplane airplane = new Airplane(118);
-	static int[] plrow = new int[21];
+	//static Airplane airplane = new Airplane(118);
+	static Plane700 se = new Plane700(118);
+	static int[] plrow = new int[22];
 	static int countr=0;
 	
 	public static void main(String args[]) {
@@ -20,7 +21,6 @@ public class Airport {
 	
 	public static void op700() { //to populate 700 plane, setup
 		//for700
-				Plane700 se = new Plane700(118);
 				se.populateArray();
 				se.row7();
 				se.timePP7();
@@ -43,53 +43,57 @@ public class Airport {
 			}
 	}
 	
-	private static boolean isRightRow(int j, int k) {
-		if (j == k) {
-			return true;
-		} else {
-			return false;
-		}
-	}
+	
 	
 	
 	private static void ultimate() {
-		System.out.println(Arrays.toString(plrow));
-		int seatCount=-1;
+		int seatCount=0;
 		int tempCurrentRow=0;
-		int temp=0, tempPassNum=0;
+		int temp=0, tempPassNum=0, tempPassNum1=1;
 		plrow[tempCurrentRow] = 11; //equal to 11 if just moving along
-		while (seatCount < airplane.NumSeats) {
-			if(isRowBusy(tempCurrentRow+1)==false && plrow[tempCurrentRow]!=11 ) { //to move every row
-				while(plrow[tempCurrentRow]==0) {
-					tempCurrentRow-=1;
+		while (seatCount < se.NumSeats) {
+			if(isRowBusy(tempCurrentRow+1)==false && plrow[tempCurrentRow]==11 ) { //to move every row
+				for (int i=1; i<plrow.length; i++) {
+					if (plrow[plrow.length-(i+1)] != 3 && plrow[plrow.length-(i+1)] != 6 && plrow[plrow.length-(i+1)] != 9) {
+						plrow[plrow.length-i] = plrow[plrow.length-(i+1)];
+					}
 				}
-				for (int i=plrow.length; i<0; i--) {
-					plrow[i] = plrow[i-1];
-					tempCurrentRow +=1;
-					tempPassNum +=1;
-					plrow[0] =1;
-						for (int l=tempCurrentRow; l<0;l--) {
-							if(isRightRow(l, airplane.row7[tempPassNum])==true){
-								plrow[l] = airplane.time[tempPassNum];
-							}
-						}
-				}
+				System.out.println(Arrays.toString(plrow));
+				tempCurrentRow +=1;
+				tempPassNum +=1;
+				plrow[0]=11;
+				
 				
 				
 			} else { //if row is busy 
-				
-				for (int m=tempCurrentRow; m<0; m--) {
+				System.out.println(Arrays.toString(plrow));
+				for (int m=1; m<tempCurrentRow+1; m++) {
 					if(plrow[m]==0) {
-						for (int n = m; n<0; m--) {
+						for (int n = 1; n<m; m++) {
 							plrow[n] =plrow[n-1];
 						}
-						plrow[0]=1;
 					}
-					if(plrow[m]!=0 && plrow[m]!=11 ) {
+					else if (plrow[m]==1 && tempCurrentRow==m) {
+						plrow[m] = 0;
+						tempCurrentRow-=1;
+					}
+					else if(plrow[m]!=0 && plrow[m]!=11 ) {
 						temp = plrow[m];
 						temp -=1;
 						plrow[m] = temp;
 					}
+				}
+			}
+	//		for (int l=1; l<plrow.length;l++) {
+	//			if(tempCurrentRow-l == se.row7[tempPassNum1+(l+1)] && plrow[l]==11){
+	//				plrow[l] = (se.time[tempPassNum1+(l+1)]-1);
+	//				tempPassNum1+=1;
+	//			}
+	//		}
+			for (int l=1; l<plrow.length;l++) {
+				if(l == se.row7[tempPassNum1+1] && plrow[l]==11){
+					plrow[l] = (se.time[tempPassNum1+1]-1);
+					tempPassNum1+=1;
 				}
 			}
 			countr +=1;
