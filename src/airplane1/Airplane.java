@@ -85,7 +85,6 @@ public class Airplane { //airplane houses passengers and methods relating to the
 			}
 		}
 		System.out.println(Arrays.toString(time));
-		
 	}
 	
 	public int rowMax() {

@@ -45,37 +45,52 @@ public class Airport {
 	
 	
 	
-	
 	private static void ultimate() {
 		int seatCount=0;
 		int tempCurrentRow=0;
-		int temp=0, tempPassNum=0, tempPassNum1=1;
+		int[] temp2 = new int[22];
+		int[] temp3 = new int[22];
+		int temp=0, tempPassNum=1, tempPassNum1=1;
 		plrow[tempCurrentRow] = 11; //equal to 11 if just moving along
+		temp2[0]=se.row7[0];
+		temp3[0]=se.time[0];
 		while (seatCount < se.NumSeats) {
+			for (int l=1; l<plrow.length;l++) {
+				if(l == temp2[l] && plrow[l]==11){
+					plrow[l] = (temp3[l]);
+				}
+			}
 			if(isRowBusy(tempCurrentRow+1)==false && plrow[tempCurrentRow]==11 ) { //to move every row
 				for (int i=1; i<plrow.length; i++) {
-					if (plrow[plrow.length-(i+1)] != 3 && plrow[plrow.length-(i+1)] != 6 && plrow[plrow.length-(i+1)] != 9) {
+					if (plrow[plrow.length-(i+1)] ==11) {
 						plrow[plrow.length-i] = plrow[plrow.length-(i+1)];
+						temp2[plrow.length-i] = temp2[plrow.length-(i+1)];
+						temp3[plrow.length-i] = temp3[plrow.length-(i+1)];
 					}
 				}
-				System.out.println(Arrays.toString(plrow));
 				tempCurrentRow +=1;
 				tempPassNum +=1;
 				plrow[0]=11;
-				
-				
+				temp2[0] = se.row7[tempPassNum];
+				temp3[0] = se.time[tempPassNum];
+				System.out.println(Arrays.toString(plrow));
+				System.out.println(Arrays.toString(temp2));
+				System.out.println(Arrays.toString(temp3));
 				
 			} else { //if row is busy 
 				System.out.println(Arrays.toString(plrow));
-				for (int m=1; m<tempCurrentRow+1; m++) {
-					if(plrow[m]==0) {
-						for (int n = 1; n<m; m++) {
-							plrow[n] =plrow[n-1];
+				for (int m=1; m<plrow.length-1; m++) {
+					if(plrow[m]==0 && plrow[m-1]==11) {
+						for (int n = 1; n<m; n++) {
+							while(plrow[n-1]==11) {
+								plrow[n] =plrow[n-1];
+							}
 						}
 					}
-					else if (plrow[m]==1 && tempCurrentRow==m) {
+					else if (plrow[m]==1 ) {
 						plrow[m] = 0;
-						tempCurrentRow-=1;
+						temp2[m] =0;
+						seatCount +=1;
 					}
 					else if(plrow[m]!=0 && plrow[m]!=11 ) {
 						temp = plrow[m];
@@ -90,12 +105,7 @@ public class Airport {
 	//				tempPassNum1+=1;
 	//			}
 	//		}
-			for (int l=1; l<plrow.length;l++) {
-				if(l == se.row7[tempPassNum1+1] && plrow[l]==11){
-					plrow[l] = (se.time[tempPassNum1+1]-1);
-					tempPassNum1+=1;
-				}
-			}
+			
 			countr +=1;
 		}
 		System.out.println(countr);
