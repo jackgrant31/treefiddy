@@ -55,11 +55,11 @@ public class Airport {
 		temp2[0]=se.row7[0];
 		temp3[0]=se.time[0];
 		
-		System.out.println(plrow.length);
 		while (seatCount < 118) {
 			System.out.println(Arrays.toString(plrow));
 			System.out.println(Arrays.toString(temp2));
 			System.out.println(Arrays.toString(temp3));
+			System.out.println(seatCount);
 			for (int l=1; l<plrow.length;l++) {
 				if(l == temp2[l] && plrow[l]==11){
 					plrow[l] = (temp3[l]);
@@ -79,24 +79,20 @@ public class Airport {
 						plrow[plrow.length-(i+1)]=0;
 						temp2[plrow.length-(i+1)]=0;
 						temp3[plrow.length-(i+1)]=0;
-						
-					
 				
-				
-				
-			} else if(plrow[plrow.length-(i+1)] ==1){ //if row is busy 
-				plrow[plrow.length-(i+1)] = 0;
-				temp2[plrow.length-(i+1)] =0;
-				temp3[plrow.length-(i+1)]=0;
+			} else if(plrow[plrow.length-i] ==1){ //if row is busy 
+				plrow[plrow.length-i] = 0;
+				temp2[plrow.length-i] =0;
+				temp3[plrow.length-i]=0;
 				seatCount +=1;
-			}else if(plrow[plrow.length-(i+1)] !=11 && plrow[plrow.length-(i+1)] !=0 && plrow[plrow.length-(i+1)] !=1){
-				temp = plrow[plrow.length-(i+1)];
+			}else if(plrow[plrow.length-i] !=11 && plrow[plrow.length-i] !=0 && plrow[plrow.length-i] !=1){
+				temp = plrow[plrow.length-i];
 				temp -=1;
-				plrow[plrow.length-(i+1)] = temp;
+				plrow[plrow.length-i] = temp;
 				}
 			}
 			
-			if (plrow[0]==0) { // Board a single passenger to row 0 if it is open
+			if (plrow[0]==0 && tempPassNum!=118) { // Board a single passenger to row 0 if it is open
 				plrow[0]=11;
 				temp2[0] = se.row7[tempPassNum];
 				temp3[0] = se.time[tempPassNum];
