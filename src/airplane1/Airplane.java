@@ -5,24 +5,21 @@ import java.util.Arrays;
 
 public class Airplane { //airplane houses passengers and methods relating to them
 
-	public int NumSeats=118;
+	public static int NumSeats=118;
 	
 	public Airplane(int specNumSeats) {
 		NumSeats = specNumSeats;
 	}
 	int[] Passenger_Numbers = new int[NumSeats];
 	int[] Plane_Seats = new int[NumSeats];
-	int[] row7 = new int[NumSeats];
+	int[] row = new int[NumSeats];
 	int[] time = new int[NumSeats];
 	int rmax =0;
+	int row2=0, row3=0;
 	
 	
 	public void populateArray() { //this creates a seating array and random passenger array//put in inherited classes for different capacities
-		
-		
 			Plane_Seats = java.util.stream.IntStream.rangeClosed(1, NumSeats).toArray();//Generates list of seats from 1 to First_Plane's value
-		
-			
 				for (int j = 0; j < Passenger_Numbers.length; j++){
 					Passenger_Numbers[j] = (int) (1 + Math.random()*NumSeats);
 					if (j > 0) {
@@ -33,30 +30,17 @@ public class Airplane { //airplane houses passengers and methods relating to the
 						}//end for
 					}//end if
 				}//end for
-				
-				
-				System.out.println(Arrays.toString(Plane_Seats));
-				System.out.println(Arrays.toString(Passenger_Numbers));
 	}
 	
-	public void row7() {//this method assigns a row to each plane seat based on the plane and places it in a new array
+	public void row() {//this method assigns a row to each plane seat based on the plane and places it in a new array
 		//this method needs to be specific for each plane, for custom planes only specify number or rows of 2 and 3 to keep it easy
 		for(int i=0; i<NumSeats; i++) {
-			if (Passenger_Numbers[i] < 13 ) {
-				row7[i] = (int) (3+Passenger_Numbers[i])/4; //extra 3 comes from the way java rounds
-			}
-			else if(Passenger_Numbers[i] < 43 && Passenger_Numbers[i] > 12 ) { 
-				row7[i] = (int) (11+Passenger_Numbers[i])/6;  //extra 11 compensates for the fact that the first few rows only have 4 seats, not 6 (add 6(2 per row)), and then an additional 5 for the rounding
-				//ex. row 4 contains seats 13-18, but 24-29 will yeild a 4 so add 11
-			}
-			else if(Passenger_Numbers[i]>42 && Passenger_Numbers[i]<47) { //that stupid emergency row
-				row7[i] = 9;
-			}
-			else {
-			row7[i] = (13+Passenger_Numbers[i])/6;
+			if (Passenger_Numbers[i] < (row2*4)+1 ) {
+				row[i] = (int) (3+Passenger_Numbers[i])/4; //extra 3 comes from the way java rounds
+			} else { 
+				row[i] = (int) ((5+2*row2)+Passenger_Numbers[i])/6;  //extra 11 compensates for the fact that the first few rows only have 4 seats, not 6 (add 6(2 per row)), and then an additional 5 for the rounding
 			}
 		}
-		System.out.println(Arrays.toString(row7));
 	}
 
 	public void timePP7() { //time per person (for plane 7) there is a way to do this not hardcoded... working on it
@@ -87,10 +71,17 @@ public class Airplane { //airplane houses passengers and methods relating to the
 		System.out.println(Arrays.toString(time));
 	}
 	
+	public static void divideSeats() {
+		int seats4 = Math.round(NumSeats/3);
+		int seats7 = Math.round(NumSeats/3)+1;
+		int seats10 = NumSeats- seats4- seats7;
+		System.out.println(seats4+" "+ seats7+ " "+ seats10);
+	}
+	
 	public int rowMax() {
 		for(int i=0; i<NumSeats; i++) {
-			if (row7[i] > rmax) {
-				row7[i] = rmax;
+			if (row[i] > rmax) {
+				row[i] = rmax;
 			}
 		}
 		return rmax;
@@ -98,10 +89,6 @@ public class Airplane { //airplane houses passengers and methods relating to the
 	
 	public void setNumSeats(int temp) {
 		NumSeats = temp;
-	}
-	
-	private void checkIsBoarded()  {
-		//no
 	}
 	
 	
