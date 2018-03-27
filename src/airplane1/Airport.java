@@ -1,19 +1,21 @@
 package airplane1;
 
 import java.util.Arrays;
+import java.util.stream.IntStream;
 
 public class Airport {
 	static Plane700 se = new Plane700(118);
 	static int[] plrow = new int[22];
-	static int countr=0;
+	static int countr=0, leftPlane=0;
 	static int tempCurrentRow=0, seatCount=0;
 	static int[] temp2 = new int[22]; //temp row # that moves with primary
 	static int[] temp3 = new int[22]; //temp row time
-	static int temp=0, tempPassNum=1;
+	static int temp=0, temp1=0,temp5=0, tempPassNum=1;
+	static int[] inAisle = new int[22];
 	
 	public static void main(String args[]) {
 		op700();
-		boarding();
+		deboarding();
 	}
 	
 	public static void op800() { //to populate 800 plane
@@ -35,8 +37,6 @@ public class Airport {
 				a3.populateArray();
 	}
 	
-	
-	
 	private static boolean isRowBusy(int j)  {
 		//row 0 is the walkway before the first row, so row[1] is row 1
 			if (plrow[j] != 0) {
@@ -51,6 +51,7 @@ public class Airport {
 		temp2[0]=se.row7[0];
 		temp3[0]=se.time[0];
 	}
+	
 	
 	public static void checkSeat() {
 		for (int l=1; l<plrow.length;l++) {
@@ -103,6 +104,7 @@ public class Airport {
 	private static void boarding() {
 		initBoard();
 		while (seatCount < 118) {
+			checkSeat();
 			printTest();
 			for (int i=1; i<plrow.length; i++) { // the whole length
 				if(plrow[plrow.length-(i+1)] ==11 && plrow[plrow.length-i]==0) { // Check that the next row is open and the current row isnt being seated
@@ -121,32 +123,48 @@ public class Airport {
 		System.out.println(countr);
 	}
 	
+	public static void deboarding() {
+		System.out.println("test1");
+		int temp=0;
+		while ( leftPlane < 118) {
+			for (int k = 1; k < 119;k++) {
+				k = temp1;
+				//System.out.println(IntStream.of(inAisle).anyMatch(x -> x==temp1));
+				if (IntStream.of(inAisle).anyMatch(x -> x==temp1)==true) { //create inAisle array and search here
+					System.out.println("test2");
+					if (plrow[k]==0) {
+						plrow[k-1]= se.time[k-1]; 
+						inAisle[temp5]=k;
+						temp5+=1;
+					}
+				}
+			}
+			System.out.println(Arrays.toString(plrow));
+				for (int i=1; i<plrow.length; i++) {
+					if (plrow[i] == 11) {
+						if (plrow[i-1] == 0) {
+							plrow[i-1] = plrow[i];
+							plrow[i] = 0;
+							if (i-1 == 0) {
+								leftPlane+=1;
+								plrow[0] = 0;
+							} // end if they move to row zero
+						} // end if next row is open 
+					} else if (plrow[i]!=0 && plrow[i]!=11) {
+						plrow[i]=temp;
+						temp-=1;
+						plrow[i]=temp;
+						if (plrow[i]==0) {
+							plrow[i]=11;
+						} // end if current row has stood up
+					} // end if current row is standing up
+				} // end for they are is the row currently
+				countr+=1;
+		} // end for loop of passengers
+	
+	}} // end while
 	
 	
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-}
+
