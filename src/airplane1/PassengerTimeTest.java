@@ -11,7 +11,7 @@ public class PassengerTimeTest {
 
 	@Test
 	public void test() {
-		airplane.populateArray();
+		airplane.populateArrayRandom();
 		airplane.row7();
 		airplane.timePP7();
 		int pass = (int) ((int) 118*Math.random());

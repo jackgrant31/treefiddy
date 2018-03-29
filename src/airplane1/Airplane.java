@@ -12,14 +12,15 @@ public class Airplane { //airplane houses passengers and methods relating to the
 	}
 	int[] Passenger_Numbers = new int[NumSeats];
 	int[] Plane_Seats = new int[NumSeats];
-	int[] row7 = new int[118];
+	int[] row7 = new int[NumSeats];
 	int[] row = new int[NumSeats];
 	int[] time = new int[NumSeats];
-	int rmax =0;
+	int[] temp5 = new int[NumSeats];
+	int rmax =0, R6 = 90, R4 = 28, temp = 0;
 	int row2=0, row3=0;
 	
 	
-	public void populateArray() { //this creates a seating array and random passenger array//put in inherited classes for different capacities
+	public void populateArrayRandom() { //random
 			Plane_Seats = java.util.stream.IntStream.rangeClosed(1, NumSeats).toArray();//Generates list of seats from 1 to First_Plane's value
 				for (int j = 0; j < Passenger_Numbers.length; j++){
 					Passenger_Numbers[j] = (int) (1 + Math.random()*NumSeats);
@@ -31,6 +32,34 @@ public class Airplane { //airplane houses passengers and methods relating to the
 						}//end for
 					}//end if
 				}//end for
+	}
+	
+	public void selectData(int temp1, int temp2) {
+		for (int i = 0; i < Passenger_Numbers.length; i++){ //economy 1
+			if (Passenger_Numbers[i] < temp2 && Passenger_Numbers[i] > temp1) {
+				temp5[temp] = Passenger_Numbers[i];
+				temp += 1;
+			}//end if
+		}//end for
+	}
+	
+	public void populateArrayZone() {
+		populateArrayRandom();
+		selectData(0,R4+1);
+		selectData(R4,(R4 + 1)+(R6/3));
+		selectData((R4)+(R6/3),(R4+1)+2*(R6/3));
+		selectData((R4)+2*(R6/3),(R4 + 1)+3*(R6/3));
+		}//End Main
+	
+	public void populateArrayForward() {
+		Passenger_Numbers = java.util.stream.IntStream.rangeClosed(1, NumSeats).toArray();
+	}
+	
+	public void populateArrayBackward() {
+		Plane_Seats = java.util.stream.IntStream.rangeClosed(1, NumSeats).toArray();
+		for (int i=1; i<Plane_Seats.length+1;i++) {
+			Passenger_Numbers[i-1]=Plane_Seats[Plane_Seats.length-i];
+		}
 	}
 	
 	public void row() {//this method assigns a row to each plane seat based on the plane and places it in a new array
