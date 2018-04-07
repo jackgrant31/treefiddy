@@ -6,7 +6,7 @@ import java.util.Arrays;
 
 import org.junit.Test;
 
-public class PassengerTimeTest {
+public class TestPassengerTime {
 	Plane700 airplane = new Plane700(118);
 
 	@Test

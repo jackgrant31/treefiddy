@@ -15,20 +15,24 @@ public class Airport {
 	
 	public static void main(String args[]) {
 		op700();
-		boarding();
+		System.out.println(Arrays.toString(se.Passenger_Numbers));
+		System.out.println(Arrays.toString(se.Plane_Seats));
+		System.out.println(se.NumSeats);
+		//boarding();
 	}
 	
 	public static void op800() { //to populate 800 plane
 		//for 800
-				Plane800 ei = new Plane800(154);
+				Plane800 ei = new Plane800(150);
 				ei.populateArrayRandom();
 	}
 	
 	public static void op700() { //to populate 700 plane, setup
 		//for700
-				se.populateArrayZone();
-				se.row7();
-				se.timePP7();
+				se.populateArrayRandom();
+				se.divideSeats();
+				//se.row7();
+				//se.timePP7();
 	}
 	
 	public static void opA320() { //to populate A320 plane
@@ -101,9 +105,9 @@ public class Airport {
 		tempPassNum+=1;
 	}
 	
-	private static void boarding() {
+	static void boarding() {
 		initBoard();
-		while (seatCount < 118) {
+		while (seatCount < se.NumSeats) {
 			checkSeat();
 			printB();
 			for (int i=1; i<plrow.length; i++) { // the whole length
@@ -115,7 +119,7 @@ public class Airport {
 					decreaseTime(i);
 				}
 			}
-			if (plrow[0]==0 && tempPassNum!=118) { // Board a single passenger to row 0 if it is open
+			if (plrow[0]==0 && tempPassNum!=se.NumSeats) { // Board a single passenger to row 0 if it is open
 				boardPassenger();
 			}	
 			countr +=1;
@@ -124,8 +128,8 @@ public class Airport {
 	}
 	
 	public static void deboarding() {
-		while ( leftPlane < 118) {
-			for (int k = 1; k < 119;k++) {
+		while ( leftPlane < se.NumSeats) {
+			for (int k = 1; k < se.NumSeats +1;k++) {
 				temp1=k;
 				if (IntStream.of(inAisle).anyMatch(x -> x==temp1)==false) { //create inAisle array and search here
 					getInAisle(k);

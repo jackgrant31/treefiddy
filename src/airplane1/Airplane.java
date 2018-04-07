@@ -6,7 +6,6 @@ import java.util.Arrays;
 public class Airplane { //airplane houses passengers and methods relating to them
 
 	public static int NumSeats=118;
-	
 	public Airplane(int specNumSeats) {
 		NumSeats = specNumSeats;
 	}
@@ -16,13 +15,14 @@ public class Airplane { //airplane houses passengers and methods relating to the
 	int[] row = new int[NumSeats];
 	int[] time = new int[NumSeats];
 	int[] temp5 = new int[NumSeats];
-	int rmax =0, R6 = 90, R4 = 28, temp = 0;
+	int rmax =0, R6 , R4 , temp = 0;
 	int row2=0, row3=0;
+	int seats4 = 0, seats7 = 0, seats10 = 0;
 	
 	
 	public void populateArrayRandom() { //random
 			Plane_Seats = java.util.stream.IntStream.rangeClosed(1, NumSeats).toArray();//Generates list of seats from 1 to First_Plane's value
-				for (int j = 0; j < Passenger_Numbers.length; j++){
+				for (int j = 0; j < Plane_Seats.length; j++){
 					Passenger_Numbers[j] = (int) (1 + Math.random()*NumSeats);
 					if (j > 0) {
 						for (int k = 0; k <= j-1; k++) {
@@ -65,7 +65,7 @@ public class Airplane { //airplane houses passengers and methods relating to the
 	public void row() {//this method assigns a row to each plane seat based on the plane and places it in a new array
 		//this method needs to be specific for each plane, for custom planes only specify number or rows of 2 and 3 to keep it easy
 		for(int i=0; i<NumSeats; i++) {
-			if (Passenger_Numbers[i] < (row2*4)+1 ) {
+			if (Passenger_Numbers[i] < (row2*4)+1 ) {//row2 is the number of rows of 6
 				row[i] = (int) (3+Passenger_Numbers[i])/4; //extra 3 comes from the way java rounds
 			} else { 
 				row[i] = (int) ((5+2*row2)+Passenger_Numbers[i])/6;  //extra 11 compensates for the fact that the first few rows only have 4 seats, not 6 (add 6(2 per row)), and then an additional 5 for the rounding
@@ -78,7 +78,7 @@ public class Airplane { //airplane houses passengers and methods relating to the
 		for(int i=0; i<NumSeats; i++) {
 			temp = (int) ( (3*Math.random())+1);	//yields a 1,2 or 3 randomly
 			temp1 = 3*temp+1; // with quik maffs, yeilds 4,7,10
-			while ((temp4 > 39 && temp1 == 4) || (temp7>38 && temp1 ==7) || (temp10>38 && temp1==10) ){
+			while ((temp4 > seats4 && temp1 == 4) || (temp7> seats7 && temp1 ==7) || (temp10> seats10 && temp1==10) ){
 				temp = (int) ( (3*Math.random())+1);	
 				temp1 = 3*temp+1;
 			}
@@ -98,7 +98,6 @@ public class Airplane { //airplane houses passengers and methods relating to the
 				temp2 += 1;
 			}
 		}
-		System.out.println(Arrays.toString(time));
 	}
 	
 	public void row7() {//this method assigns a row to each plane seat based on the plane and places it in a new array
@@ -120,11 +119,21 @@ public class Airplane { //airplane houses passengers and methods relating to the
 		}
 	}
 	
-	public static void divideSeats() {
-		int seats4 = Math.round(NumSeats/3);
-		int seats7 = Math.round(NumSeats/3)+1;
-		int seats10 = NumSeats- seats4- seats7;
-		System.out.println(seats4+" "+ seats7+ " "+ seats10);
+	public void divideSeats() {
+		if (Math.round( (double) NumSeats/3 ) >NumSeats/3){
+			seats4 = (int) Math.round(NumSeats/3) +1;
+			seats7 = (int) Math.round(NumSeats/3) +1;
+			seats10 = NumSeats- seats4- seats7;
+		}
+		else if (Math.round(NumSeats/3 ) <NumSeats/3) {
+			seats4 = (int) Math.round(NumSeats/3) +1;
+			seats7 = (int) Math.round(NumSeats/3);
+			seats10 = NumSeats- seats4- seats7;
+		} else {
+			seats4 = (int) Math.round(NumSeats/3) ;
+			seats7 = (int) Math.round(NumSeats/3);
+			seats10 = NumSeats- seats4- seats7;
+		}
 	}
 	
 	public int rowMax() {
