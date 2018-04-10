@@ -5,10 +5,19 @@ import java.util.Arrays;
 
 public class Airplane { //airplane houses passengers and methods relating to them
 
-	public static int NumSeats=118;
-	public Airplane(int specNumSeats) {
+		//static int specNumSeats, specNumSeats1;
+		
+		//public static void main(String[] args) {
+		//	specNumSeats =118;
+		//}
+		
+		
+	public static int NumSeats;
+	
+	public Airplane( int specNumSeats) {
 		NumSeats = specNumSeats;
 	}
+	
 	int[] Passenger_Numbers = new int[NumSeats];
 	int[] Plane_Seats = new int[NumSeats];
 	int[] row7 = new int[NumSeats];
@@ -21,6 +30,7 @@ public class Airplane { //airplane houses passengers and methods relating to the
 	
 	
 	public void populateArrayRandom() { //random
+		System.out.println(NumSeats);
 			Plane_Seats = java.util.stream.IntStream.rangeClosed(1, NumSeats).toArray();//Generates list of seats from 1 to First_Plane's value
 				for (int j = 0; j < Plane_Seats.length; j++){
 					Passenger_Numbers[j] = (int) (1 + Math.random()*NumSeats);
@@ -73,7 +83,7 @@ public class Airplane { //airplane houses passengers and methods relating to the
 		}
 	}
 
-	public void timePP7() { //time per person (for plane 7) there is a way to do this not hardcoded... working on it
+	public void timePP() { //time per person (for plane 7) there is a way to do this not hardcoded... working on it
 		int temp4 = 0, temp7 = 0, temp10=0, temp, temp1, temp2=0; //plane 7 has 40 4, 39 7, 39 10, this is enforced in the while loop
 		for(int i=0; i<NumSeats; i++) {
 			temp = (int) ( (3*Math.random())+1);	//yields a 1,2 or 3 randomly
@@ -100,24 +110,7 @@ public class Airplane { //airplane houses passengers and methods relating to the
 		}
 	}
 	
-	public void row7() {//this method assigns a row to each plane seat based on the plane and places it in a new array
-		//this method needs to be specific for each plane, for custom planes only specify number or rows of 2 and 3 to keep it easy
-		for(int i=0; i<NumSeats; i++) {
-			if (Passenger_Numbers[i] < 13 ) {
-				row7[i] = (int) (3+Passenger_Numbers[i])/4; //extra 3 comes from the way java rounds
-			}
-			else if(Passenger_Numbers[i] < 43 && Passenger_Numbers[i] > 12 ) { 
-				row7[i] = (int) (11+Passenger_Numbers[i])/6;  //extra 11 compensates for the fact that the first few rows only have 4 seats, not 6 (add 6(2 per row)), and then an additional 5 for the rounding
-				//ex. row 4 contains seats 13-18, but 24-29 will yeild a 4 so add 11
-			}
-			else if(Passenger_Numbers[i]>42 && Passenger_Numbers[i]<47) { //that stupid emergency row
-				row7[i] = 9;
-			}
-			else {
-			row7[i] = (13+Passenger_Numbers[i])/6;
-			}
-		}
-	}
+
 	
 	public void divideSeats() {
 		if (Math.round( (double) NumSeats/3 ) >NumSeats/3){

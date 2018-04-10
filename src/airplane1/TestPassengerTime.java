@@ -13,7 +13,7 @@ public class TestPassengerTime {
 	public void test() {
 		airplane.populateArrayRandom();
 		airplane.row7();
-		airplane.timePP7();
+		airplane.timePP();
 		int pass = (int) ((int) 118*Math.random());
 		int temp1 = airplane.time[pass-1];
 		

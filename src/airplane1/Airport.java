@@ -5,40 +5,51 @@ import java.util.stream.IntStream;
 
 public class Airport {
 	static Plane700 se = new Plane700(118);
+	static PlaneA320 a3 = new PlaneA320(150);
+	static Plane800 ei = new Plane800(154);
 	static int[] plrow = new int[22];
 	static int countr=0, leftPlane=0;
 	static int tempCurrentRow=0, seatCount=0;
-	static int[] temp2 = new int[22]; //temp row # that moves with primary
-	static int[] temp3 = new int[22]; //temp row time
+	static int[] temp2 = new int[se.row7.length]; //temp row # that moves with primary
+	static int[] temp3 = new int[se.row7.length]; //temp row time
 	static int temp=0, temp1=0,temp5=0, tempPassNum=1, temp7=0;
-	static int[] inAisle = new int[118];
+	static int[] inAisle = new int[se.NumSeats];
 	
 	public static void main(String args[]) {
+		System.out.println(se.NumSeats);
 		op700();
 		System.out.println(Arrays.toString(se.Passenger_Numbers));
 		System.out.println(Arrays.toString(se.Plane_Seats));
 		System.out.println(se.NumSeats);
-		//boarding();
+		boarding();
 	}
 	
 	public static void op800() { //to populate 800 plane
 		//for 800
-				Plane800 ei = new Plane800(150);
-				ei.populateArrayRandom();
+			//	ei.populateArrayRandom();
+			//	ei.divideSeats();
+			//	ei.row();
+			//	ei.timePP();
 	}
 	
 	public static void op700() { //to populate 700 plane, setup
 		//for700
 				se.populateArrayRandom();
 				se.divideSeats();
-				//se.row7();
-				//se.timePP7();
+				se.row7();
+				se.timePP();
 	}
 	
 	public static void opA320() { //to populate A320 plane
 		//forA320
-				PlaneA320 a3 = new PlaneA320(150);
-				a3.populateArrayRandom();
+		//		a3.populateArrayRandom();
+		//		a3.divideSeats();
+		//		a3.row();
+		//		a3.timePP();
+	}
+	
+	public static void opcustom() {
+		
 	}
 	
 	private static boolean isRowBusy(int j)  {
