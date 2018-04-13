@@ -4,55 +4,96 @@ import java.util.Arrays;
 import java.util.stream.IntStream;
 
 public class Airport {
-	static Plane700 se = new Plane700(118);
-	static PlaneA320 a3 = new PlaneA320(150);
-	static Plane800 ei = new Plane800(154);
-	static int[] plrow = new int[22];
-	static int countr=0, leftPlane=0;
-	static int tempCurrentRow=0, seatCount=0;
-	static int[] temp2 = new int[se.row7.length]; //temp row # that moves with primary
-	static int[] temp3 = new int[se.row7.length]; //temp row time
-	static int temp=0, temp1=0,temp5=0, tempPassNum=1, temp7=0;
-	static int[] inAisle = new int[se.NumSeats];
+	int countr=0, leftPlane=0, NumSeats;
+	int tempCurrentRow=0, seatCount=0, rowNum;
+	int temp=0, temp1=0,temp5=0, tempPassNum=1, temp7=0;
+	int[] temp2, temp3, time1, row1, inAisle, plrow;
 	
 	public static void main(String args[]) {
-		System.out.println(se.NumSeats);
-		op700();
-		System.out.println(Arrays.toString(se.Passenger_Numbers));
-		System.out.println(Arrays.toString(se.Plane_Seats));
-		System.out.println(se.NumSeats);
-		boarding();
+		Airport airport = new Airport();
+		airport.op700();
+		airport.boarding();
 	}
 	
-	public static void op800() { //to populate 800 plane
-		//for 800
-			//	ei.populateArrayRandom();
-			//	ei.divideSeats();
-			//	ei.row();
-			//	ei.timePP();
+	public void op800() { //to populate 800 plane
+				Plane800 ei = new Plane800(154);
+				ei.populateArrayRandom();
+				ei.divideSeats();
+				ei.row();
+				ei.timePP();
+				rowNum = ei.getRowNum()+1;
+				NumSeats = ei.getNum();
+				inAisle = new int[NumSeats];
+				temp2 = new int[rowNum]; //temp row num
+				temp3 = new int[rowNum]; //temp row time
+				time1 = new int[NumSeats];
+				row1 = new int[NumSeats];
+				plrow = new int[rowNum];
+				time1 = ei.getTime();
+				row1 = ei.getRow();
 	}
 	
-	public static void op700() { //to populate 700 plane, setup
+	public void op700() { //to populate 700 plane, setup
 		//for700
+				Plane700 se = new Plane700(118);
+				se.init();
 				se.populateArrayRandom();
 				se.divideSeats();
 				se.row7();
 				se.timePP();
+				rowNum = se.getRow7Num()+1;
+				NumSeats = se.getNum();
+				inAisle = new int[NumSeats];
+				temp2 = new int[rowNum]; //temp row num
+				temp3 = new int[rowNum]; //temp row time
+				time1 = new int[NumSeats];
+				row1 = new int[NumSeats];
+				plrow = new int[rowNum];
+				time1 = se.getTime();
+				row1 = se.getRow7();
 	}
 	
-	public static void opA320() { //to populate A320 plane
-		//forA320
-		//		a3.populateArrayRandom();
-		//		a3.divideSeats();
-		//		a3.row();
-		//		a3.timePP();
+
+	
+	public void opA320() { //to populate A320 plane
+		PlaneA320 a3 = new PlaneA320(150);
+				a3.populateArrayRandom();
+				a3.divideSeats();
+				a3.row();
+				a3.timePP();
+				rowNum = a3.getRowNum()+1;
+				NumSeats = a3.getNum();
+				inAisle = new int[NumSeats];
+				temp2 = new int[rowNum]; //temp row num
+				temp3 = new int[rowNum]; //temp row time
+				time1 = new int[NumSeats];
+				row1 = new int[NumSeats];
+				plrow = new int[rowNum];
+				time1 = a3.getTime();
+				row1 = a3.getRow();
 	}
 	
-	public static void opcustom() {
-		
+	public void opcustom() {
+		//Main main = new Main()
+	//	NumSeats = main.getNum();
+		Custom cu = new Custom(NumSeats);
+		cu.populateArrayRandom();
+		cu.divideSeats();
+		cu.row();
+		cu.timePP();
+		rowNum = cu.getRowNum()+1;
+		NumSeats = cu.getNum();
+		inAisle = new int[NumSeats];
+		temp2 = new int[rowNum]; //temp row num
+		temp3 = new int[rowNum]; //temp row time
+		time1 = new int[NumSeats];
+		row1 = new int[NumSeats];
+		plrow = new int[rowNum];
+		time1 = cu.getTime();
+		row1 = cu.getRow();
 	}
 	
-	private static boolean isRowBusy(int j)  {
+	private boolean isRowBusy(int j)  {
 		//row 0 is the walkway before the first row, so row[1] is row 1
 			if (plrow[j] != 0) {
 				return true;
@@ -61,14 +102,14 @@ public class Airport {
 			}
 	}
 	
-	public static void initBoard() {
+	public void initBoard() {
 		plrow[tempCurrentRow] = 11; //equal to 11 if just moving along
-		temp2[0]=se.row7[0];
-		temp3[0]=se.time[0];
+		temp2[0]=row1[0];
+		temp3[0]=time1[0];
 	}
 	
 	
-	public static void checkSeat() {
+	public void checkSeat() {
 		for (int l=1; l<plrow.length;l++) {
 			if(l == temp2[l] && plrow[l]==11){
 				plrow[l] = (temp3[l]);
@@ -76,7 +117,7 @@ public class Airport {
 		}
 	}
 	
-	public static void move(int i) {
+	public void move(int i) {
 		// For the entire plane rows, check that the current cell is not sitting and next cell is a zero. 
 		// Move the passenger up one cell
 		plrow[plrow.length-i] = plrow[plrow.length-(i+1)];
@@ -89,36 +130,36 @@ public class Airport {
 		temp3[plrow.length-(i+1)]=0;
 	}
 	
-	public static void resetRow(int i) {
+	public void resetRow(int i) {
 		plrow[plrow.length-i] = 0;
 		temp2[plrow.length-i] =0;
 		temp3[plrow.length-i]=0;
 		seatCount +=1;
 	}
 	
-	public static void printB() {
+	public void printB() {
 		System.out.println(Arrays.toString(plrow));
 		System.out.println(Arrays.toString(temp2));
 		System.out.println(Arrays.toString(temp3));
 		System.out.println(seatCount);
 	}
 	
-	public static void decreaseTime(int i) {
+	public void decreaseTime(int i) {
 		temp = plrow[plrow.length-i];
 		temp -=1;
 		plrow[plrow.length-i] = temp;
 	}
 	
-	public static void boardPassenger() { //if the waiting row is free
+	public void boardPassenger() { //if the waiting row is free
 		plrow[0]=11;
-		temp2[0] = se.row7[tempPassNum];
-		temp3[0] = se.time[tempPassNum];
+		temp2[0] = row1[tempPassNum];
+		temp3[0] = time1[tempPassNum];
 		tempPassNum+=1;
 	}
 	
-	static void boarding() {
+	public void boarding() {
 		initBoard();
-		while (seatCount < se.NumSeats) {
+		while (seatCount < NumSeats) {
 			checkSeat();
 			printB();
 			for (int i=1; i<plrow.length; i++) { // the whole length
@@ -130,7 +171,7 @@ public class Airport {
 					decreaseTime(i);
 				}
 			}
-			if (plrow[0]==0 && tempPassNum!=se.NumSeats) { // Board a single passenger to row 0 if it is open
+			if (plrow[0]==0 && tempPassNum!=NumSeats) { // Board a single passenger to row 0 if it is open
 				boardPassenger();
 			}	
 			countr +=1;
@@ -138,9 +179,9 @@ public class Airport {
 		System.out.println(countr);
 	}
 	
-	public static void deboarding() {
-		while ( leftPlane < se.NumSeats) {
-			for (int k = 1; k < se.NumSeats +1;k++) {
+	public void deboarding() {
+		while ( leftPlane < NumSeats) {
+			for (int k = 1; k < NumSeats +1;k++) {
 				temp1=k;
 				if (IntStream.of(inAisle).anyMatch(x -> x==temp1)==false) { //create inAisle array and search here
 					getInAisle(k);
@@ -159,7 +200,7 @@ public class Airport {
 		} 
 	}
 	
-	public static void timeDown(int i) {
+	public void timeDown(int i) {
 		int temp = 0;
 		temp=plrow[i];
 		temp -=1;
@@ -168,7 +209,7 @@ public class Airport {
 			plrow[i]=11;
 	}}
 	
-	public static void moveInAisle(int i) {
+	public void moveInAisle(int i) {
 		if (plrow[i] == 11) {
 			if (plrow[i-1] == 0) {
 				plrow[i-1] = plrow[i];
@@ -181,16 +222,16 @@ public class Airport {
 	}
 	}
 	
-	public static void getInAisle(int k) {
-		temp7 = se.row7[k-1];
+	public void getInAisle(int k) {
+		temp7 = row1[k-1];
 		if (plrow[temp7]==0) {
-			plrow[temp7]= se.time[k-1]; 
+			plrow[temp7]= time1[k-1]; 
 			inAisle[temp5]=k;
 			temp5+=1;
 		}
 	}
 	
-	public static void printD() {
+	public void printD() {
 		System.out.println(Arrays.toString(inAisle));
 		System.out.println(Arrays.toString(plrow));
 	}

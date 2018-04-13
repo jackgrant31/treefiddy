@@ -1,38 +1,34 @@
 package airplane1;
 import java.util.Arrays;
 
-
-
 public class Airplane { //airplane houses passengers and methods relating to them
 
-		//static int specNumSeats, specNumSeats1;
-		
-		//public static void main(String[] args) {
-		//	specNumSeats =118;
-		//}
-		
-		
-	public static int NumSeats;
+	public int NumSeats;
+	int[] Passenger_Numbers, Plane_Seats, temp5, time, row, row7;
+	int rmax =0, R6 , R4 , temp = 0;
+	int row2=0, row3=0;
+	int seats4 = 0, seats7 = 0, seats10 = 0;
 	
 	public Airplane( int specNumSeats) {
 		NumSeats = specNumSeats;
 	}
 	
-	int[] Passenger_Numbers = new int[NumSeats];
-	int[] Plane_Seats = new int[NumSeats];
-	int[] row7 = new int[NumSeats];
-	int[] row = new int[NumSeats];
-	int[] time = new int[NumSeats];
-	int[] temp5 = new int[NumSeats];
-	int rmax =0, R6 , R4 , temp = 0;
-	int row2=0, row3=0;
-	int seats4 = 0, seats7 = 0, seats10 = 0;
+	public void init() {
+		Passenger_Numbers = new int[NumSeats];
+		Plane_Seats = new int[NumSeats];
+		row7 = new int[NumSeats];
+		row = new int[NumSeats];
+		time = new int[NumSeats];
+		temp5 = new int[NumSeats];
+	}
 	
 	
 	public void populateArrayRandom() { //random
 		System.out.println(NumSeats);
+		System.out.println(Arrays.toString(Passenger_Numbers));
 			Plane_Seats = java.util.stream.IntStream.rangeClosed(1, NumSeats).toArray();//Generates list of seats from 1 to First_Plane's value
 				for (int j = 0; j < Plane_Seats.length; j++){
+					System.out.println(j);
 					Passenger_Numbers[j] = (int) (1 + Math.random()*NumSeats);
 					if (j > 0) {
 						for (int k = 0; k <= j-1; k++) {
@@ -132,7 +128,7 @@ public class Airplane { //airplane houses passengers and methods relating to the
 	public int rowMax() {
 		for(int i=0; i<NumSeats; i++) {
 			if (row[i] > rmax) {
-				row[i] = rmax;
+				rmax = row[i];
 			}
 		}
 		return rmax;
@@ -142,5 +138,19 @@ public class Airplane { //airplane houses passengers and methods relating to the
 		NumSeats = temp;
 	}
 	
-	
+	public int[] getPassenger() {
+		return Passenger_Numbers;
+	}
+	public int[] getTime() {
+		return time;
+	}
+	public int[] getRow() {
+		return row;
+	}
+	public int getNum() {
+		return NumSeats;
+	}
+	public int getRowNum() {
+		return rowMax();
+	}
 }

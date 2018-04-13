@@ -2,6 +2,8 @@ package airplane1;
 
 
 public class Plane700 extends Airplane {
+	
+	int rmax1 =0;
 
 	public Plane700(int specNumSeats) {
 		super(specNumSeats);
@@ -28,6 +30,22 @@ public class Plane700 extends Airplane {
 			row7[i] = (13+Passenger_Numbers[i])/6;
 			}
 		}
+	}
+	
+	public int rowMax() {
+		for(int i=0; i<NumSeats; i++) {
+			if (row7[i] > rmax1) {
+				rmax1 = row7[i];
+			}
+		}
+		return rmax1;
+	}
+	
+	public int[] getRow7() {
+		return row7;
+	}
+	public int getRow7Num() {
+		return rowMax();
 	}
 	
 }
