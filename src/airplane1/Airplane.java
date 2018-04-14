@@ -24,11 +24,8 @@ public class Airplane { //airplane houses passengers and methods relating to the
 	
 	
 	public void populateArrayRandom() { //random
-		System.out.println(NumSeats);
-		System.out.println(Arrays.toString(Passenger_Numbers));
 			Plane_Seats = java.util.stream.IntStream.rangeClosed(1, NumSeats).toArray();//Generates list of seats from 1 to First_Plane's value
 				for (int j = 0; j < Plane_Seats.length; j++){
-					System.out.println(j);
 					Passenger_Numbers[j] = (int) (1 + Math.random()*NumSeats);
 					if (j > 0) {
 						for (int k = 0; k <= j-1; k++) {

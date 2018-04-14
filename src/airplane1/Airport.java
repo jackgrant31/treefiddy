@@ -7,7 +7,7 @@ public class Airport {
 	int countr=0, leftPlane=0, NumSeats;
 	int tempCurrentRow=0, seatCount=0, rowNum;
 	int temp=0, temp1=0,temp5=0, tempPassNum=1, temp7=0;
-	int[] temp2, temp3, time1, row1, inAisle, plrow;
+	int[] temp2, temp3, time1, row1, inAisle, plrow,pass1;
 	
 	public static void main(String args[]) {
 		Airport airport = new Airport();
@@ -23,12 +23,14 @@ public class Airport {
 				ei.timePP();
 				rowNum = ei.getRowNum()+1;
 				NumSeats = ei.getNum();
+				pass1 = ei.getPassenger();
 				inAisle = new int[NumSeats];
 				temp2 = new int[rowNum]; //temp row num
 				temp3 = new int[rowNum]; //temp row time
 				time1 = new int[NumSeats];
 				row1 = new int[NumSeats];
 				plrow = new int[rowNum];
+				
 				time1 = ei.getTime();
 				row1 = ei.getRow();
 	}
@@ -43,6 +45,7 @@ public class Airport {
 				se.timePP();
 				rowNum = se.getRow7Num()+1;
 				NumSeats = se.getNum();
+				pass1 = se.getPassenger();
 				inAisle = new int[NumSeats];
 				temp2 = new int[rowNum]; //temp row num
 				temp3 = new int[rowNum]; //temp row time
@@ -63,6 +66,7 @@ public class Airport {
 				a3.timePP();
 				rowNum = a3.getRowNum()+1;
 				NumSeats = a3.getNum();
+				pass1 = a3.getPassenger();
 				inAisle = new int[NumSeats];
 				temp2 = new int[rowNum]; //temp row num
 				temp3 = new int[rowNum]; //temp row time
@@ -83,6 +87,7 @@ public class Airport {
 		cu.timePP();
 		rowNum = cu.getRowNum()+1;
 		NumSeats = cu.getNum();
+		pass1 = cu.getPassenger();
 		inAisle = new int[NumSeats];
 		temp2 = new int[rowNum]; //temp row num
 		temp3 = new int[rowNum]; //temp row time
