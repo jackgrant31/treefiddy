@@ -166,7 +166,7 @@ public class Airport {
 		initBoard();
 		while (seatCount < NumSeats) {
 			checkSeat();
-			printB();
+			//printB();
 			for (int i=1; i<plrow.length; i++) { // the whole length
 				if(plrow[plrow.length-(i+1)] ==11 && plrow[plrow.length-i]==0) { // Check that the next row is open and the current row isnt being seated
 					move(i);
@@ -181,7 +181,7 @@ public class Airport {
 			}	
 			countr +=1;
 		}
-		System.out.println(countr);
+		//System.out.println(countr);
 	}
 	
 	public void deboarding() {
