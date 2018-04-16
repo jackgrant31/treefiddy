@@ -5,7 +5,7 @@ import java.util.stream.IntStream;
 
 public class Airport {
 	int countr=0, leftPlane=0, NumSeats;
-	int tempCurrentRow=0, seatCount=0, rowNum;
+	int tempCurrentRow=0, seatCount=0, rowNum, R4,R6,move;
 	int temp=0, temp1=0,temp5=0, tempPassNum=1, temp7=0;
 	int[] temp2, temp3, time1, row1, inAisle, plrow,pass1;
 	
@@ -17,7 +17,16 @@ public class Airport {
 	
 	public void op800() { //to populate 800 plane
 				Plane800 ei = new Plane800(154);
-				ei.populateArrayRandom();
+				ei.init();
+				if(move == 0) {
+					ei.populateArrayForward();
+				}else if(move==1) {
+					ei.populateArrayBackward();
+				} else if (move==2) {
+					ei.populateArrayZone();
+				}else {
+					ei.populateArrayRandom();
+				}
 				ei.divideSeats();
 				ei.row();
 				ei.timePP();
@@ -30,7 +39,6 @@ public class Airport {
 				time1 = new int[NumSeats];
 				row1 = new int[NumSeats];
 				plrow = new int[rowNum];
-				
 				time1 = ei.getTime();
 				row1 = ei.getRow();
 	}
@@ -39,6 +47,15 @@ public class Airport {
 		//for700
 				Plane700 se = new Plane700(118);
 				se.init();
+				if(move == 0) {
+					se.populateArrayForward();
+				}else if(move==1) {
+					se.populateArrayBackward();
+				} else if (move==2) {
+					se.populateArrayZone();
+				}else {
+					se.populateArrayRandom();
+				}
 				se.populateArrayRandom();
 				se.divideSeats();
 				se.row7();
@@ -56,11 +73,18 @@ public class Airport {
 				row1 = se.getRow7();
 	}
 	
-
-	
 	public void opA320() { //to populate A320 plane
-		PlaneA320 a3 = new PlaneA320(150);
-				a3.populateArrayRandom();
+				PlaneA320 a3 = new PlaneA320(150);
+				a3.init();
+				if(move == 0) {
+					a3.populateArrayForward();
+				}else if(move==1) {
+					a3.populateArrayBackward();
+				} else if (move==2) {
+					a3.populateArrayZone();
+				}else {
+					a3.populateArrayRandom();
+				}
 				a3.divideSeats();
 				a3.row();
 				a3.timePP();
@@ -78,10 +102,20 @@ public class Airport {
 	}
 	
 	public void opcustom() {
-		//Main main = new Main()
-	//	NumSeats = main.getNum();
-		Custom cu = new Custom(NumSeats);
-		cu.populateArrayRandom();
+		Custom cu = new Custom(212);
+		R4 = cu.getFour();
+		R6=cu.getSix();
+		NumSeats = cu.getSeats();
+		cu.init();
+		if(move == 0) {
+			cu.populateArrayForward();
+		}else if(move==1) {
+			cu.populateArrayBackward();
+		} else if (move==2) {
+			cu.populateArrayZone();
+		}else {
+			cu.populateArrayRandom();
+		}
 		cu.divideSeats();
 		cu.row();
 		cu.timePP();
@@ -98,13 +132,9 @@ public class Airport {
 		row1 = cu.getRow();
 	}
 	
-	private boolean isRowBusy(int j)  {
-		//row 0 is the walkway before the first row, so row[1] is row 1
-			if (plrow[j] != 0) {
-				return true;
-			} else {
-				return false;
-			}
+	public void init() {
+		MainRun run = new MainRun();
+		move = run.getMov();
 	}
 	
 	public void initBoard() {
@@ -241,6 +271,12 @@ public class Airport {
 		System.out.println(Arrays.toString(plrow));
 	}
 	
+	public int getR4() {
+		return R4;
+	}
+	public int getR6() {
+		return R6;
+	}
 	
 }
 	

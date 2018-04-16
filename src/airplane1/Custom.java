@@ -7,10 +7,19 @@ public class Custom extends Airplane {
 	
 	
 	public static void main(String args[]) {
-		int rows4 = 7, rows6 = 15, R4, R6;
-		R4 = rows4 *4;
-		R6 = rows6*6;
-		int NumSeats = R4 + R6;
+		
 	}
 	
+	public int getSeats() {
+		int NumSeats = 4*getFour()+6*getSix();
+		return NumSeats;
+	}
+	public int getFour() {
+		GUI gui = new GUI();
+		return gui.getR4();
+	}
+	public int getSix() {
+		//GUI gui = new GUI();
+		return 30;//gui.getR6();
+	}
 }

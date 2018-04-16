@@ -1,5 +1,4 @@
 package airplane1;
-import java.util.Arrays;
 
 public class Airplane { //airplane houses passengers and methods relating to them
 
@@ -31,10 +30,10 @@ public class Airplane { //airplane houses passengers and methods relating to the
 						for (int k = 0; k <= j-1; k++) {
 							if (Passenger_Numbers[k] == Passenger_Numbers[j]) {
 								j--;
-							}//end if
-						}//end for
-					}//end if
-				}//end for
+							}
+						}
+					}
+				}
 	}
 	
 	public void selectData(int temp1, int temp2) {
@@ -42,12 +41,15 @@ public class Airplane { //airplane houses passengers and methods relating to the
 			if (Passenger_Numbers[i] < temp2 && Passenger_Numbers[i] > temp1) {
 				temp5[temp] = Passenger_Numbers[i];
 				temp += 1;
-			}//end if
-		}//end for
+			}
+		}
 	}
 	
 	public void populateArrayZone() {
 		populateArrayRandom();
+		Airport port = new Airport();
+		R4 = port.getR4();
+		R6 = port.getR6();
 		selectData(0,R4+1);
 		selectData(R4,(R4 + 1)+(R6/3));
 		selectData((R4)+(R6/3),(R4+1)+2*(R6/3));
@@ -67,8 +69,10 @@ public class Airplane { //airplane houses passengers and methods relating to the
 	
 	public void row() {//this method assigns a row to each plane seat based on the plane and places it in a new array
 		//this method needs to be specific for each plane, for custom planes only specify number or rows of 2 and 3 to keep it easy
+		Airport port = new Airport();
+		row2 = port.getR4();
 		for(int i=0; i<NumSeats; i++) {
-			if (Passenger_Numbers[i] < (row2*4)+1 ) {//row2 is the number of rows of 6
+			if (Passenger_Numbers[i] < (row2*4)+1 ) {//row2 is the number of rows of 4
 				row[i] = (int) (3+Passenger_Numbers[i])/4; //extra 3 comes from the way java rounds
 			} else { 
 				row[i] = (int) ((5+2*row2)+Passenger_Numbers[i])/6;  //extra 11 compensates for the fact that the first few rows only have 4 seats, not 6 (add 6(2 per row)), and then an additional 5 for the rounding

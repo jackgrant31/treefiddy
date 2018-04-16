@@ -5,9 +5,10 @@ public class Plane800 extends Airplane {
 		super(specNumSeats);
 	};
 	
-	public static void main(String args[]) {
-		
-		
+	public int getFour() {
+		return 4;
 	}
-	
+	public int getSix() {
+		return 23;
+	}
 }
