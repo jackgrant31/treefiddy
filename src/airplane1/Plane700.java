@@ -9,10 +9,6 @@ public class Plane700 extends Airplane {
 		super(specNumSeats);
 	};
 	
-	public static void main(String args[]) {
-		
-	}
-	
 	public void row7() {//this method assigns a row to each plane seat based on the plane and places it in a new array
 		//this method needs to be specific for each plane, for custom planes only specify number or rows of 2 and 3 to keep it easy
 		for(int i=0; i<NumSeats; i++) {

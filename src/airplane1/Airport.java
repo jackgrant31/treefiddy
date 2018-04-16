@@ -5,18 +5,19 @@ import java.util.stream.IntStream;
 
 public class Airport {
 	int countr=0, leftPlane=0, NumSeats;
-	int tempCurrentRow=0, seatCount=0, rowNum, R4,R6,move;
+	int tempCurrentRow=0, seatCount=0, rowNum, R4,R6,move=3;
 	int temp=0, temp1=0,temp5=0, tempPassNum=1, temp7=0;
 	int[] temp2, temp3, time1, row1, inAisle, plrow,pass1;
 	
 	public static void main(String args[]) {
 		Airport airport = new Airport();
-		airport.op700();
+		airport.op800();
 		airport.boarding();
 	}
 	
 	public void op800() { //to populate 800 plane
 				Plane800 ei = new Plane800(154);
+				init();
 				ei.init();
 				if(move == 0) {
 					ei.populateArrayForward();
@@ -24,7 +25,7 @@ public class Airport {
 					ei.populateArrayBackward();
 				} else if (move==2) {
 					ei.populateArrayZone();
-				}else {
+				}else if(move==3){
 					ei.populateArrayRandom();
 				}
 				ei.divideSeats();
@@ -44,8 +45,8 @@ public class Airport {
 	}
 	
 	public void op700() { //to populate 700 plane, setup
-		//for700
 				Plane700 se = new Plane700(118);
+				init();
 				se.init();
 				if(move == 0) {
 					se.populateArrayForward();
@@ -75,6 +76,7 @@ public class Airport {
 	
 	public void opA320() { //to populate A320 plane
 				PlaneA320 a3 = new PlaneA320(150);
+				init();
 				a3.init();
 				if(move == 0) {
 					a3.populateArrayForward();
@@ -106,6 +108,7 @@ public class Airport {
 		R4 = cu.getFour();
 		R6=cu.getSix();
 		NumSeats = cu.getSeats();
+		init();
 		cu.init();
 		if(move == 0) {
 			cu.populateArrayForward();
@@ -279,8 +282,3 @@ public class Airport {
 	}
 	
 }
-	
-	
-	
-	
-

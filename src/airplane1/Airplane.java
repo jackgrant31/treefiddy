@@ -1,5 +1,7 @@
 package airplane1;
 
+import java.util.Arrays;
+
 public class Airplane { //airplane houses passengers and methods relating to them
 
 	public int NumSeats;

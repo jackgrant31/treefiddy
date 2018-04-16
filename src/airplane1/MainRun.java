@@ -4,22 +4,13 @@ import java.util.Arrays;
 import java.util.Scanner;
 
 public class MainRun {
-	//static int count =0;
 	int[] best;
 	int low, mov, avg, runs = 1000;
 	int[] num = new int[runs];
-
-    public static void main(String[] args) {
-    		MainRun run = new MainRun();
-    		run.run();
-    }
     
-    public void run() {
-    	GUI gui = new GUI();
-    	int plane=gui.getPlane();
-    	int bd = gui.getbd();
-    	mov = gui.getMove(); 
-    	int lowcount=999, count=0;
+    public void run(int plane,int bd, int mov1) {
+    	mov = mov1;
+    	int lowcount=100000000, count=0;
     	Airport air1 = new Airport();
     best = new int[air1.NumSeats];
     	while(count<runs) {

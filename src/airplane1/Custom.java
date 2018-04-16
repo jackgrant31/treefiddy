@@ -4,10 +4,15 @@ public class Custom extends Airplane {
 	public Custom(int specNumSeats) {
 		super(specNumSeats);
 	};
-	
+	int dum1,dum2;
 	
 	public static void main(String args[]) {
 		
+	}
+	
+	public void dum(int temp, int temp1) {
+		dum1=temp;
+		dum2=temp1;
 	}
 	
 	public int getSeats() {
@@ -15,11 +20,9 @@ public class Custom extends Airplane {
 		return NumSeats;
 	}
 	public int getFour() {
-		GUI gui = new GUI();
-		return gui.getR4();
+		return dum1;
 	}
 	public int getSix() {
-		//GUI gui = new GUI();
-		return 30;//gui.getR6();
+		return dum2;
 	}
 }

@@ -13,6 +13,8 @@ import javafx.scene.control.*;
 		Scene scene1, scene2, scene3, scene4, scene5;
 		int plane, bd, R4, R6,move;
 		String sixs, fours, num1, num2;
+		Text label2b = new Text(num1);
+		Text label3b = new Text(num2); 
 
 		public static void main(String[] args) {
 			launch(args);
@@ -37,13 +39,13 @@ import javafx.scene.control.*;
 				plane=1;
 			});
 			button3.setOnAction(e -> { 
-				window.setScene(scene5);
 				plane=2;
+				window.setScene(scene5);
 			});
 			Button button4 = new Button("Return to main page");
 			button5.setOnAction(e -> { 
-				window.setScene(scene4);
 				plane=3;
+				window.setScene(scene4);
 			});
 
 			//Layout 1 - children laid out in vertical column
@@ -91,11 +93,10 @@ import javafx.scene.control.*;
 
 			//scene3 stuff
 			Label label2a = new Label("Lowest time:");
-			Text label2b = new Text(num1);
 			Label label3a = new Label("Average time:");
-			Text label3b = new Text(num2); 
 			Button buttond = new Button("quit this shit");
 			buttond.setOnAction(e -> System.exit(0));
+			
 
 			//Layout 3
 			VBox layout3 = new VBox(14,label2a, label2b,label3a,label3b,button4,buttond);
@@ -145,10 +146,15 @@ public void getCustom(TextField fieldSix, TextField fieldFour) {
 		}
 
 public void runThis() {
+	System.out.println(move);
 	MainRun run = new MainRun();
-	run.run();
+	run.run(plane, bd, move);
 	num1= Integer.toString(run.getLow());
 	num2= Integer.toString(run.getAvg());
+	label2b.setText(String.format(num1 + " seconds"));
+	label3b.setText(String.format(num2 + " seconds"));
+
+	System.out.println(plane);
 	System.out.println(num1+num2);
 }
 
