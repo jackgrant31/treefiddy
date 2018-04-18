@@ -5,7 +5,7 @@ import java.util.stream.IntStream;
 
 public class Airport {
 	int countr=0, leftPlane=0, NumSeats;
-	int tempCurrentRow=0, seatCount=0, rowNum, R4,R6,move=3;
+	int tempCurrentRow=0, seatCount=0, rowNum, R4,R6,move;
 	int temp=0, temp1=0,temp5=0, tempPassNum=1, temp7=0;
 	int[] temp2, temp3, time1, row1, inAisle, plrow,pass1;
 	
@@ -17,8 +17,11 @@ public class Airport {
 	
 	public void op800() { //to populate 800 plane
 				Plane800 ei = new Plane800(154);
-				init();
 				ei.init();
+				R4=ei.getFour();
+				R6=ei.getSix();
+				ei.getNums(R4, R6);
+				move=2;
 				if(move == 0) {
 					ei.populateArrayForward();
 				}else if(move==1) {
@@ -46,7 +49,6 @@ public class Airport {
 	
 	public void op700() { //to populate 700 plane, setup
 				Plane700 se = new Plane700(118);
-				init();
 				se.init();
 				if(move == 0) {
 					se.populateArrayForward();
@@ -76,8 +78,10 @@ public class Airport {
 	
 	public void opA320() { //to populate A320 plane
 				PlaneA320 a3 = new PlaneA320(150);
-				init();
 				a3.init();
+				R4=a3.getFour();
+				R6=a3.getSix();
+				a3.getNums(R4, R6);
 				if(move == 0) {
 					a3.populateArrayForward();
 				}else if(move==1) {
@@ -104,11 +108,8 @@ public class Airport {
 	}
 	
 	public void opcustom() {
-		Custom cu = new Custom(212);
-		R4 = cu.getFour();
-		R6=cu.getSix();
-		NumSeats = cu.getSeats();
-		init();
+		Custom cu = new Custom(NumSeats);
+		cu.getNums(R4, R6);
 		cu.init();
 		if(move == 0) {
 			cu.populateArrayForward();
@@ -123,7 +124,6 @@ public class Airport {
 		cu.row();
 		cu.timePP();
 		rowNum = cu.getRowNum()+1;
-		NumSeats = cu.getNum();
 		pass1 = cu.getPassenger();
 		inAisle = new int[NumSeats];
 		temp2 = new int[rowNum]; //temp row num
@@ -135,9 +135,14 @@ public class Airport {
 		row1 = cu.getRow();
 	}
 	
-	public void init() {
-		MainRun run = new MainRun();
-		move = run.getMov();
+	public void init(int mov) {
+		move = mov;
+	}
+	
+	public void getget(int ok, int ok1, int ok2) {
+		NumSeats = ok;
+		R4 = ok1;
+		R6 = ok2;
 	}
 	
 	public void initBoard() {
@@ -225,7 +230,7 @@ public class Airport {
 					getInAisle(k);
 				}
 			}
-			printD();
+			//printD();
 			for (int i=1; i<plrow.length; i++) {
 				if (plrow[i] == 11) {
 					moveInAisle(i);
@@ -234,7 +239,7 @@ public class Airport {
 				} 
 			} 
 			countr+=1;
-			System.out.println(countr);
+			//System.out.println(countr);
 		} 
 	}
 	
@@ -272,13 +277,6 @@ public class Airport {
 	public void printD() {
 		System.out.println(Arrays.toString(inAisle));
 		System.out.println(Arrays.toString(plrow));
-	}
-	
-	public int getR4() {
-		return R4;
-	}
-	public int getR6() {
-		return R6;
 	}
 	
 }

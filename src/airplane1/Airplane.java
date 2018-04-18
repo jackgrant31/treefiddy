@@ -6,7 +6,7 @@ public class Airplane { //airplane houses passengers and methods relating to the
 
 	public int NumSeats;
 	int[] Passenger_Numbers, Plane_Seats, temp5, time, row, row7;
-	int rmax =0, R6 , R4 , temp = 0;
+	int rmax =0, R6 , R4,R41,R61 , temp = 0;
 	int row2=0, row3=0;
 	int seats4 = 0, seats7 = 0, seats10 = 0;
 	
@@ -49,17 +49,24 @@ public class Airplane { //airplane houses passengers and methods relating to the
 	
 	public void populateArrayZone() {
 		populateArrayRandom();
-		Airport port = new Airport();
-		R4 = port.getR4();
-		R6 = port.getR6();
+		R4=4*R41;
+		R6=6*R61;
 		selectData(0,R4+1);
 		selectData(R4,(R4 + 1)+(R6/3));
 		selectData((R4)+(R6/3),(R4+1)+2*(R6/3));
 		selectData((R4)+2*(R6/3),(R4 + 1)+3*(R6/3));
+		for(int i=0;i<Passenger_Numbers.length;i++) {
+			Passenger_Numbers[i]=temp5[i];
+		}
 		}//End Main
 	
 	public void populateArrayForward() {
 		Passenger_Numbers = java.util.stream.IntStream.rangeClosed(1, NumSeats).toArray();
+	}
+	
+	public void getNums(int four, int six) {
+		R41=four;
+		R61=six;
 	}
 	
 	public void populateArrayBackward() {
@@ -72,7 +79,7 @@ public class Airplane { //airplane houses passengers and methods relating to the
 	public void row() {//this method assigns a row to each plane seat based on the plane and places it in a new array
 		//this method needs to be specific for each plane, for custom planes only specify number or rows of 2 and 3 to keep it easy
 		Airport port = new Airport();
-		row2 = port.getR4();
+		row2 = R41;
 		for(int i=0; i<NumSeats; i++) {
 			if (Passenger_Numbers[i] < (row2*4)+1 ) {//row2 is the number of rows of 4
 				row[i] = (int) (3+Passenger_Numbers[i])/4; //extra 3 comes from the way java rounds
@@ -155,5 +162,8 @@ public class Airplane { //airplane houses passengers and methods relating to the
 	}
 	public int getRowNum() {
 		return rowMax();
+	}
+	public void override(int[] temp) {
+		Passenger_Numbers = temp;
 	}
 }

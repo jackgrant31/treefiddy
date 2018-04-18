@@ -10,9 +10,9 @@ public class Custom extends Airplane {
 		
 	}
 	
-	public void dum(int temp, int temp1) {
-		dum1=temp;
-		dum2=temp1;
+	public void dum(String temp, String temp1) {
+		dum1=Integer.parseInt(temp);
+		dum2=Integer.parseInt(temp1);
 	}
 	
 	public int getSeats() {
@@ -20,9 +20,9 @@ public class Custom extends Airplane {
 		return NumSeats;
 	}
 	public int getFour() {
-		return dum1;
+		return dum2;
 	}
 	public int getSix() {
-		return dum2;
+		return dum1;
 	}
 }

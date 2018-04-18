@@ -5,16 +5,21 @@ import java.util.Scanner;
 
 public class MainRun {
 	int[] best;
-	int low, mov, avg, runs = 1000;
+	int low, avg, runs = 1000,temp1,temp2,temp3;
 	int[] num = new int[runs];
+	
+	public static void main(String args[]) {
+		MainRun run = new MainRun();
+		run.run(2,0,3);
+	}
     
-    public void run(int plane,int bd, int mov1) {
-    	mov = mov1;
+    public void run(int plane,int bd, int mov) {
     	int lowcount=100000000, count=0;
     	Airport air1 = new Airport();
     best = new int[air1.NumSeats];
     	while(count<runs) {
     		Airport air = new Airport();
+    		air.init(mov);	
     		if (plane ==0) {
     			air.op700();
     		} else if (plane ==1) {
@@ -22,6 +27,7 @@ public class MainRun {
     		}else if (plane ==2) {
     			air.opA320();
     		} else {
+    			air.getget(temp1, temp2, temp3);
     			air.opcustom();
     		}
     		if (bd==0) {
@@ -60,7 +66,9 @@ public class MainRun {
 	public int getLow() {
 		return low;
 	}
-	public int getMov() {
-		return mov;
+	public void specC(int temp, int tmep1, int tmep2) {
+		temp1 = temp;
+		temp2 = tmep1;
+		temp3 =tmep2;
 	}
 }

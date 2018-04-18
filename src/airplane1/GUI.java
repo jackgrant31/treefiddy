@@ -11,7 +11,7 @@ import javafx.scene.control.*;
 
 		Stage window;
 		Scene scene1, scene2, scene3, scene4, scene5;
-		int plane, bd, R4, R6,move;
+		int plane, bd, R4, R6,move,temp;
 		String sixs, fours, num1, num2;
 		Text label2b = new Text(num1);
 		Text label3b = new Text(num2); 
@@ -117,6 +117,9 @@ import javafx.scene.control.*;
 
 			ok.setOnAction(e -> {
 				getCustom(fieldSix, fieldFour);
+				Custom cu = new Custom(1);
+				cu.dum(sixs, fours);
+				temp = cu.getSeats();
 				window.setScene(scene5);
 			});
 
@@ -146,16 +149,13 @@ public void getCustom(TextField fieldSix, TextField fieldFour) {
 		}
 
 public void runThis() {
-	System.out.println(move);
 	MainRun run = new MainRun();
+	run.specC(temp, Integer.parseInt(fours), Integer.parseInt(sixs));
 	run.run(plane, bd, move);
 	num1= Integer.toString(run.getLow());
 	num2= Integer.toString(run.getAvg());
 	label2b.setText(String.format(num1 + " seconds"));
 	label3b.setText(String.format(num2 + " seconds"));
-
-	System.out.println(plane);
-	System.out.println(num1+num2);
 }
 
 public int getbd() {
