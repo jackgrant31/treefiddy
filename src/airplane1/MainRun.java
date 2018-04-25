@@ -5,12 +5,10 @@ import java.util.Scanner;
 
 public class MainRun {
 	int[] best;
-	int low, avg, runs = 1000,temp1,temp2,temp3;
+	int low, avg, runs = 1000,temp1,temp2,temp3,bd1, NumSeats;
 	int[] num = new int[runs];
 	
 	public static void main(String args[]) {
-		MainRun run = new MainRun();
-		run.run(2,0,3);
 	}
     
     public void run(int plane,int bd, int mov) {
@@ -35,6 +33,8 @@ public class MainRun {
     		} else {
     			air.deboarding();
     		}
+    		bd1 = bd;
+    		NumSeats = air.getNumSeats();
     		num[count]=air.countr;
         if(air.countr<lowcount) {
         		best = air.pass1;

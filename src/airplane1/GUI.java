@@ -1,20 +1,33 @@
 package airplane1;
 
-	import javafx.application.*;
+	import javafx.animation.Animation;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+import javafx.application.*;
 	import javafx.stage.*;
-	import javafx.scene.*;
+import javafx.util.Duration;
+import javafx.scene.*;
 	import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
 import javafx.scene.control.*;
+import javafx.scene.image.ImageView;
 
 	public class GUI extends Application {
 
 		Stage window;
-		Scene scene1, scene2, scene3, scene4, scene5;
+		Scene scene1, scene2, scene3, scene4, scene5,scene8;
+		GridPane gridPane1;
 		int plane, bd, R4, R6,move,temp;
-		String sixs, fours, num1, num2;
+		int[] best;
+		String sixs, fours, num1, num2, t1, t2, t3;
 		Text label2b = new Text(num1);
+		Text c1 = new Text(t1);
+		Text c2 = new Text(t2);
+		Text c3 = new Text(t3);
 		Text label3b = new Text(num2); 
+		Animation animation;
 
 		public static void main(String[] args) {
 			launch(args);
@@ -142,6 +155,44 @@ import javafx.scene.control.*;
 			scene5 = new Scene(layout5, 200, 200);
 			
 		}
+		
+		public void setAll() {
+			setc1();
+			setc2();
+			setc3();
+		}
+		
+		public void setc1() {
+			if (plane ==0) {
+    			t1="Boeing 737-700";
+    		} else if (plane ==1) {
+    			t1="Boeing 737-800";
+    		}else if (plane ==2) {
+    			t1="Airbus A320";
+    		} else {
+    			t1="Custom Plane";
+    		}
+		}
+
+		public void setc2() {
+			if (bd==0) {
+    			t2="Boarding";
+    		} else {
+    			t2="Deboarding";
+    		}
+		}
+
+		public void setc3() {
+			if(move == 0) {
+				t3="Sequential front to back";
+			}else if(move==1) {
+				t3="Sequential back to front";
+			} else if (move==2) {
+				t3="Zonal";
+			}else if(move==3){
+				t3="Random";
+			}
+		}
 
 public void getCustom(TextField fieldSix, TextField fieldFour) {
 			sixs = fieldSix.getText();
@@ -150,10 +201,13 @@ public void getCustom(TextField fieldSix, TextField fieldFour) {
 
 public void runThis() {
 	MainRun run = new MainRun();
+	if (plane==3) {
 	run.specC(temp, Integer.parseInt(fours), Integer.parseInt(sixs));
+	}
 	run.run(plane, bd, move);
 	num1= Integer.toString(run.getLow());
 	num2= Integer.toString(run.getAvg());
+	setAll();
 	label2b.setText(String.format(num1 + " seconds"));
 	label3b.setText(String.format(num2 + " seconds"));
 }
@@ -173,4 +227,5 @@ public int getR4() {
 public int getR6() {
 	return  Integer.parseInt(sixs);
 }
+
 }

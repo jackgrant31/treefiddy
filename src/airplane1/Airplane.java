@@ -78,7 +78,6 @@ public class Airplane { //airplane houses passengers and methods relating to the
 	
 	public void row() {//this method assigns a row to each plane seat based on the plane and places it in a new array
 		//this method needs to be specific for each plane, for custom planes only specify number or rows of 2 and 3 to keep it easy
-		Airport port = new Airport();
 		row2 = R41;
 		for(int i=0; i<NumSeats; i++) {
 			if (Passenger_Numbers[i] < (row2*4)+1 ) {//row2 is the number of rows of 4
@@ -144,6 +143,10 @@ public class Airplane { //airplane houses passengers and methods relating to the
 		return rmax;
 	}
 	
+	public void setSeats(int[] temp) {
+		Passenger_Numbers = temp;
+	}
+	
 	public void setNumSeats(int temp) {
 		NumSeats = temp;
 	}
@@ -162,8 +165,5 @@ public class Airplane { //airplane houses passengers and methods relating to the
 	}
 	public int getRowNum() {
 		return rowMax();
-	}
-	public void override(int[] temp) {
-		Passenger_Numbers = temp;
 	}
 }

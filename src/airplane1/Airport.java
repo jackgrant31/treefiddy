@@ -3,10 +3,14 @@ package airplane1;
 import java.util.Arrays;
 import java.util.stream.IntStream;
 
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+import javafx.util.Duration;
+
 public class Airport {
 	int countr=0, leftPlane=0, NumSeats;
 	int tempCurrentRow=0, seatCount=0, rowNum, R4,R6,move;
-	int temp=0, temp1=0,temp5=0, tempPassNum=1, temp7=0;
+	int temp=0, temp1=0,temp5=0, tempPassNum=1, temp7=0, k=0;
 	int[] temp2, temp3, time1, row1, inAisle, plrow,pass1;
 	
 	public static void main(String args[]) {
@@ -279,4 +283,7 @@ public class Airport {
 		System.out.println(Arrays.toString(plrow));
 	}
 	
+	public int getNumSeats() {
+		return NumSeats;
+	}
 }
