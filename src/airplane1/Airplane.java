@@ -79,6 +79,7 @@ public class Airplane { //airplane houses passengers and methods relating to the
 	public void row() {//this method assigns a row to each plane seat based on the plane and places it in a new array
 		//this method needs to be specific for each plane, for custom planes only specify number or rows of 2 and 3 to keep it easy
 		row2 = R41;
+		System.out.println(NumSeats);
 		for(int i=0; i<NumSeats; i++) {
 			if (Passenger_Numbers[i] < (row2*4)+1 ) {//row2 is the number of rows of 4
 				row[i] = (int) (3+Passenger_Numbers[i])/4; //extra 3 comes from the way java rounds

@@ -25,7 +25,6 @@ public class Airport {
 				R4=ei.getFour();
 				R6=ei.getSix();
 				ei.getNums(R4, R6);
-				move=2;
 				if(move == 0) {
 					ei.populateArrayForward();
 				}else if(move==1) {
