@@ -1,30 +1,36 @@
 package airplane1;
 
-	import javafx.animation.Animation;
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
+import java.util.Arrays;
+
 import javafx.application.*;
 	import javafx.stage.*;
-import javafx.util.Duration;
 import javafx.scene.*;
-	import javafx.scene.layout.*;
+import javafx.scene.chart.BarChart;
+import javafx.scene.chart.CategoryAxis;
+import javafx.scene.chart.NumberAxis;
+import javafx.scene.chart.XYChart;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
 import javafx.scene.text.Font;
-import javafx.scene.text.Text;
 import javafx.scene.control.*;
 import javafx.scene.effect.DropShadow;
-import javafx.scene.image.ImageView;
 
 	public class GUI extends Application {
 
 		Stage window;
-		Scene scene1, scene2, scene3, scene4, scene5,scene8;
+		Scene scene1, scene2, scene3, scene4, scene5,scene8, hscene;
 		GridPane gridPane1;
-		int plane, bd, R4, R6,move,temp;
-		int[] best;
+		int plane, bd, R4, R6,move,temp, first;
+		int[] best, num,histo;
 		String sixs, fours, num1, num2, t1, t2, t3;
-		Label label2b, label3b, c1,c2,c3;
+		Label label2b, label3b, step1;
+		XYChart.Series series1;
+		
+		 final static String austria = "Austria";
+		    final static String brazil = "Brazil";
+		    final static String france = "France";
+		    final static String italy = "Italy";
+		    final static String usa = "USA";
 
 		public static void main(String[] args) {
 			launch(args);
@@ -34,6 +40,23 @@ import javafx.scene.image.ImageView;
 		public void start(Stage primaryStage) {
 			window = primaryStage;
 			primaryStage.setResizable(false);
+			
+			//hist attempt
+
+			//primaryStage.setTitle("Bar Chart Sample");
+			final CategoryAxis xAxis = new CategoryAxis();
+			final NumberAxis yAxis = new NumberAxis();
+			final BarChart<String,Number> bc = 
+					new BarChart<String,Number>(xAxis,yAxis);
+			bc.setTitle("Frequency Graph");
+			xAxis.setLabel("Time (seconds)");       
+			yAxis.setLabel("Frequency");
+			
+			series1 = new XYChart.Series();   
+	        
+	        Scene scene  = new Scene(bc,800,600);
+	        bc.getData().addAll(series1);
+	     
 			
 			//sets button shadow
 			DropShadow dropShadow = new DropShadow ();
@@ -137,13 +160,12 @@ import javafx.scene.image.ImageView;
 			label3a.setLayoutY(80);
 			label2b = new Label(num1);
 			label3b = new Label(num1);
-			c1 = new Label(t1);
-			c2 = new Label(t2);
-			c3 = new Label(t3);
-			label2b.setLayoutX(10);
+			label2b.setLayoutX(20);
 			label2b.setLayoutY(30);
-			label3b.setLayoutX(10);
+			label2b.setFont(Font.font("Times New Roman", 16));
+			label3b.setLayoutX(20);
 			label3b.setLayoutY(110);
+			label3b.setFont(Font.font("Times New Roman", 16));
 			
 			Button buttond = new Button("Close Program");
 			buttond.setEffect(dropShadow);
@@ -151,13 +173,33 @@ import javafx.scene.image.ImageView;
 			buttond.setOnAction(e -> System.exit(0));
 			
 			// labels for the side window with steps user has chosen
-			Label step1 = new Label("User choices: "+ "\n>" + c1 + "\n\n>" + c2 + "\n\n>" + c3);
+			step1 = new Label("User choices: "+ "\n>" + t1 + "\n\n>" + t2 + "\n\n>" + t3);
 			step1.setBackground(new Background(new BackgroundFill(Color.WHITE, null, null)));
 			step1.setFont(Font.font("Times New Roman", 16));
 			step1.setLayoutX(200);
 			
 			//Layout 3
-			Pane layout3 = new Pane(label2a, label2b,label3a,label3b,button4,buttond,step1);
+			
+			//button for histogram
+			Button hist = new Button("Show Histogram");
+			hist.setLayoutX(10);    //set value to 320 if you want it centered
+			hist.setLayoutY(300);
+			hist.setEffect(dropShadow);
+			
+			//histogram pane 
+			Pane Hist = new Pane(button4, buttond);
+			Hist.setBackground(new Background(new BackgroundFill(Color.LIGHTGRAY, null, null)));
+			//hscene = new Scene(Hist, 800, 800);
+			hist.setOnAction(e ->{
+				outputHistogram(num);
+				test test = new test();
+				test.start(primaryStage);
+				test.addData(histo, primaryStage,first);
+				
+			});
+			
+			//Layout 3
+			Pane layout3 = new Pane(label2a, label2b,label3a,label3b,button4,buttond,step1,hist);
 			layout3.setBackground(new Background(new BackgroundFill(Color.LIGHTGRAY, null, null)));
 			scene3 = new Scene(layout3, 400, 400);
 
@@ -166,7 +208,6 @@ import javafx.scene.image.ImageView;
 			row4.setFont(Font.font("Times New Roman", 16));
 			row4.setLayoutX(10);
 			row4.setLayoutY(10);
-			
 			
 			TextField fieldFour = new TextField();
 			fieldFour.setPromptText("Insert a number here");
@@ -193,6 +234,7 @@ import javafx.scene.image.ImageView;
 				temp =cu.getSeats();
 				window.setScene(scene5);
 			});
+
 
 			//Layout 4
 			Pane layout4 =new Pane(row4, fieldFour, row6, fieldSix, ok);
@@ -268,7 +310,23 @@ import javafx.scene.image.ImageView;
 				buttond.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
 			buttond.setLayoutX(250);
 			buttond.setLayoutY(350);
-
+		}
+		
+		public void outputHistogram(int [] list)	{
+			Arrays.sort(list);
+			first =list[0];
+			int  last = list[list.length-1], tcount=0, temp =first;
+			histo = new int[(last+1)-first];
+			for (int j=0;j<(last+1)-first;j++) {
+			for(int i=0;i<list.length;i++) {
+				if(list[i] == temp) {
+					tcount +=1;
+				}
+			}
+			temp+=1;
+			histo[j]=tcount;
+			tcount=0;
+			}
 		}
 		
 		public void setAll() {
@@ -299,9 +357,9 @@ import javafx.scene.image.ImageView;
 
 		public void setc3() {
 			if(move == 0) {
-				t3="Sequential front to back";
+				t3="Sequential Front to Back";
 			}else if(move==1) {
-				t3="Sequential back to front";
+				t3="Sequential Back to Front";
 			} else if (move==2) {
 				t3="Zonal";
 			}else if(move==3){
@@ -325,9 +383,8 @@ public void runThis() {
 	setAll();
 	label2b.setText(String.format(num1 + " seconds"));
 	label3b.setText(String.format(num2 + " seconds"));
-	c1.setText(String.format(t1));
-	c2.setText(String.format(t2));
-	c3.setText(String.format(t3));
+	step1.setText(String.format((" User choices: "+ "\n  > " + t1 + " \n\n  > " + t2 + " \n\n  > " + t3 +" ")));
+	num = run.getNum();
 }
 
 public int getbd() {
@@ -345,5 +402,4 @@ public int getR4() {
 public int getR6() {
 	return  Integer.parseInt(sixs);
 }
-
 }

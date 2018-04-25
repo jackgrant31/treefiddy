@@ -17,7 +17,6 @@ public class Custom extends Airplane {
 	
 	public int getSeats() {
 		int NumSeats = 4*getFour()+6*getSix();
-		System.out.println(NumSeats +"ok");
 		return NumSeats;
 	}
 	public int getFour() {

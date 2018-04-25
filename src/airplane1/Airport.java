@@ -3,10 +3,6 @@ package airplane1;
 import java.util.Arrays;
 import java.util.stream.IntStream;
 
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
-import javafx.util.Duration;
-
 public class Airport {
 	int countr=0, leftPlane=0, NumSeats;
 	int tempCurrentRow=0, seatCount=0, rowNum, R4,R6,move;

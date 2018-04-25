@@ -1,11 +1,8 @@
 package airplane1;
 
-import java.util.Arrays;
-import java.util.Scanner;
-
 public class MainRun {
 	int[] best;
-	int low, avg, runs = 1000,temp1,temp2,temp3,bd1, NumSeats;
+	int low, avg, runs = 10000,temp1,temp2,temp3,bd1, NumSeats;
 	int[] num = new int[runs];
 	
 	public static void main(String args[]) {
