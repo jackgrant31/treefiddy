@@ -15,22 +15,12 @@ import javafx.scene.text.Font;
 import javafx.scene.control.*;
 import javafx.scene.effect.DropShadow;
 
-	public class test extends Application {
+	public class Histogram extends Application {
 
-		Stage window1;
-		Scene scene1, scene2, scene3, scene4, scene5,scene8, hscene;
-		GridPane gridPane1;
-		int plane, bd, R4, R6,move,temp,first;
-		int[] best, num,histo1;
-		String sixs, fours, num1, num2, t1, t2, t3;
-		Label label2b, label3b, step1;
+		int first;
+		int[] histo1;
 		XYChart.Series series1;
 		
-		 final static String austria = "Austria";
-		    final static String brazil = "Brazil";
-		    final static String france = "France";
-		    final static String italy = "Italy";
-		    final static String usa = "USA";
 		    int[] histo;
 		    final CategoryAxis xAxis = new CategoryAxis();
 			final NumberAxis yAxis = new NumberAxis();
@@ -43,7 +33,6 @@ import javafx.scene.effect.DropShadow;
 		@Override
 		public void start(Stage primaryStage) {
 			Stage stage2 = new Stage();
-			window1 = stage2;
 			stage2.setResizable(false);
 			
 			//hist attempt

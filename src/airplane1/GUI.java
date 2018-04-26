@@ -192,7 +192,7 @@ import javafx.scene.effect.DropShadow;
 			//hscene = new Scene(Hist, 800, 800);
 			hist.setOnAction(e ->{
 				outputHistogram(num);
-				test test = new test();
+				Histogram test = new Histogram();
 				test.start(primaryStage);
 				test.addData(histo, primaryStage,first);
 				
