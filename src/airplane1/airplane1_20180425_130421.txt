@@ -1,5 +1,0 @@
-WARNING - 13:04:21: First conversion pass
-ERROR - 13:04:21: java.net.MalformedURLException: unknown protocol: pathmap
-WARNING - 13:04:35: Convert airplane1
-WARNING - 13:04:35: First conversion pass
-ERROR - 13:04:35: java.net.MalformedURLException: unknown protocol: pathmap

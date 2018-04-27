@@ -2,7 +2,7 @@ package airplane1;
 
 public class MainRun {
 	int[] best;
-	int low, avg, runs = 1000,temp1,temp2,temp3,bd1, NumSeats;
+	int low, avg, runs = 1000,temp1,temp2,temp3,bd1, NumSeats, sum=0;
 	int[] num = new int[runs];
 	
 	public static void main(String args[]) {
@@ -40,11 +40,10 @@ public class MainRun {
         count+=1;
     }
     	low = lowcount;
-    	calcAvg();
+    calcAvg();
     }
     
     public void calcAvg() {
-    		int sum=0;
     		for(int i=0; i<runs; i++) {
     			sum += num[i];
     		}

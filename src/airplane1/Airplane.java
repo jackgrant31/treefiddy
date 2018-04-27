@@ -2,8 +2,13 @@ package airplane1;
 
 public class Airplane { //airplane houses passengers and methods relating to them
 
-	public int NumSeats;
-	int[] Passenger_Numbers, Plane_Seats, temp5, time, row, row7;
+	int NumSeats;
+	int[] Passenger_Numbers;
+	int[] Plane_Seats;
+	int[] temp5;
+	int[] time;
+	int[] row;
+	int[] row7;
 	int rmax =0, R6 , R4,R41,R61 , temp = 0;
 	int row2=0, row3=0;
 	int seats4 = 0, seats7 = 0, seats10 = 0;
