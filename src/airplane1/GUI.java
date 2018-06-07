@@ -25,12 +25,8 @@ import javafx.scene.effect.DropShadow;
 		String sixs, fours, num1, num2, t1, t2, t3;
 		Label label2b, label3b, step1;
 		XYChart.Series series1;
+
 		
-		 final static String austria = "Austria";
-		    final static String brazil = "Brazil";
-		    final static String france = "France";
-		    final static String italy = "Italy";
-		    final static String usa = "USA";
 
 		public static void main(String[] args) {
 			launch(args);
@@ -402,4 +398,5 @@ public int getR4() {
 public int getR6() {
 	return  Integer.parseInt(sixs);
 }
+public void iLoveGithub(){}
 }
