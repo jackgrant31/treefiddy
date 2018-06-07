@@ -398,5 +398,7 @@ public int getR4() {
 public int getR6() {
 	return  Integer.parseInt(sixs);
 }
-public void iLoveGithub(){}
+//does this include commments or spaces or is it the aggregate
+		
+		
 }
